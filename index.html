@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Boosted music</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="intro">
+        <div  style="margin: auto;width: 50%;"  class="intro_heading">
+            <h1>Welcome to the Boosted music</h1>
+            <p>created by:- <b>Armut</b></p>
+        </div>
+        <div class="main_div">
+            <div class="music_container">
+                <h2 id="name">Tere jaisa yar kaha</h2>
+                <div class="img_container">
+                    <img src="pic/A.jpg" alt="">
+                </div>
+                <div class="music_controls">
+                    <i class="fas fa-backward" id="prev" title="prev"></i>
+                    <i class="fas fa-play main_button" id="play" title="Play"></i>
+                    <i class="fas fa-forward" id="next" title="Next"></i>
+                </div>
+            </div>
+
+            <audio src="audio/m1.mp3"></audio>
+
+        </div>
+    </div>
+    <script>
+        const img = document.querySelector("img")
+        const music = document.querySelector("audio")
+        const play = document.getElementById('play');
+        const artist = document.getElementById('name');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+        const songs = [
+            {
+                name: "m1",
+                title: "Tere jaisa yar kaha",
+            },
+            {
+                name: "m2",
+                title: "Ek radha Ek meera",
+            },
+            {
+                name: "m3",
+                title: "Khabhi khabhi ",
+            },
+            {
+                name: "m4",
+                title: "Hum Bewafa ",
+            },
+        ];
+
+
+
+
+
+
+
+
+        let isplay = false;
+
+
+
+
+        const playMusic = () => {
+            isplay = true;
+            music.play();
+            play.classList.replace('fa-play', "fa-pause");
+            img.classList.add("anime");
+        };
+        const pauseMusic = () => {
+            isplay = false;
+            music.pause();
+            play.classList.replace("fa-pause", 'fa-play');
+            img.classList.remove("anime");
+        };
+        play.addEventListener('click', () => {
+            if (isplay) {
+                pauseMusic();
+            }
+            else {
+                playMusic();
+            }
+        })
+        const loadSong = (songs) => {
+            artist.textContent = songs.title;
+            music.src = "audio/" + songs.name + ".mp3";
+            //img.src = "pic/"+songs.name+".jpg";
+        };
+        songIndex = 0;
+        const nextSong = () => {
+            songIndex = (songIndex + 1) % songs.length;
+            loadSong(songs[songIndex]);
+            playMusic();
+        };
+        next.addEventListener('click', nextSong);
+        prev.addEventListener('click', prevSong);
+
+    </script>
+</body>
+
+</html>
